@@ -16,7 +16,12 @@ RUN python -m venv /py  && \
         build-base postgresql-dev musl-dev && \
     /py/bin/pip install -r /requirements.txt && \
     apk del .tmp-deps && \
-    adduser --disabled-password --no-create-home app
+    adduser --disabled-password --no-create-home app && \
+    mkdir -P /vol/web/static && \
+    mkdir -P /vol/web/media && \
+    chown -R app:app /vol && \
+    chmod -R 755 /vol
+
 
 ENV PATH="/py/bin:$PATH"
 
